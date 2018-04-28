@@ -4,6 +4,7 @@ import {addTodo} from './Action_Creators/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import TODO from './Components/todo_button';
+import Input from './Components/input_title';
 
 class App extends Component {
 
@@ -32,12 +33,18 @@ constructor(){
   render() {
     return (
       <div className="App">
-        <TODO handleClick = {(e) => {this.handleClick(e)}}/>
-        <input type = "text" value = {this.state.input_value} onChange = {(e) => {this.change(e)}} />
 
+      	<h1> A TO-DO Application </h1>
+
+      	<Input className = "pad" value = {this.state.input_value} onChange = {(e) => {this.change(e)}} />
+
+        <TODO className = "pad" handleClick = {(e) => {this.handleClick(e)}}/>
+        
+        <ul className = "_ul">
          {this.props.TODO_ARRAY.map(function(listValue){
             return <li key = {listValue}>{listValue}</li>;
           })}
+         </ul>
 
       </div>
     );

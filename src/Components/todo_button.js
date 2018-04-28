@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 function TODO(props){
 	return(
-		<button onClick = {props.handleClick}> ADD TODO</button>
+		<button className = 'btn btn-default _btn' onClick = {props.handleClick}> ADD TODO</button>
 	)
 }
 
