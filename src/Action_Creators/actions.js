@@ -2,7 +2,13 @@
 
 import {CONST} from '../Constants/constants';
 
-export const addTodo = (value) => ({
+export const addTodo = (VALUE) => ({
   type: CONST.ADD_TODO,
-  title: value
+  title: VALUE
+});
+
+export const deleteTodo = (VALUE) => ({
+	type: CONST.DEL_TODO,
+	title: VALUE
+
 });
