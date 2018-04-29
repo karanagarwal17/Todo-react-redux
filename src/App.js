@@ -6,6 +6,8 @@ import { bindActionCreators } from 'redux';
 import TODO from './Components/todo_button';
 import ADD from './Components/add_todo';
 import DEL from './Components/del_todo';
+import CHECK from './Components/check_todo';
+
 
 class App extends Component {
 
@@ -36,8 +38,14 @@ constructor(){
     if (e.charCode === 13) {
       this.props.addTodo(this.state.input_value);
     }
-
   	
+  }
+
+  handleClick_without_keypress_(e){
+    if(this.state.input_value == '')
+      return;
+
+      this.props.addTodo(this.state.input_value);    
   }
 
   console(){
@@ -51,7 +59,7 @@ constructor(){
       	<h1> A TO-DO Application </h1>
 
       	<ADD className = "pad" value = {this.state.input_value} onKeyPress = {(e) => {this.handleClick(e)}} onChange = {(e) => {this.change(e)}} />    
-        <TODO className = "pad" handleClick = {(e) => {this.handleClick(e)}}/>
+        <TODO className = "pad" handleClick = {(e) => {this.handleClick_without_keypress_(e)}}/>
         <ul className = "_ul">
          {this.props.TODO_ARRAY.map((listValue,index) => {
 
@@ -59,6 +67,7 @@ constructor(){
                <div id = {index}>
                   <li key={index} className = "_font" > {listValue.title} 
                     <DEL value = {listValue.title} id = {index} onClick = {(e) => {this.deleteTODO(e)}} />
+                    <CHECK />
                   </li>
                </div>
                )
