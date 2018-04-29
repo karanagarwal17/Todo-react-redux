@@ -16,7 +16,7 @@ constructor(){
 }
 
   componentDidMount(){
-  	console.log(this);
+  	console.log(this.props);
   } 
 
   change(event){
@@ -26,7 +26,6 @@ constructor(){
   }
 
   handleClick(e){
-  	console.log('moti iloveu',this.props.TODO_ARRAY);
   	this.props.addTodo(this.state.input_value);
   }
   
@@ -42,7 +41,13 @@ constructor(){
         
         <ul className = "_ul">
          {this.props.TODO_ARRAY.map(function(listValue){
-            return <li key = {listValue}>{listValue}</li>;
+            return(
+               <div>
+                <li className = "_font" key = {listValue.title}>{listValue.title} 
+                  <button className = "btn btn-default">DELETE TO-DO </button>
+                </li>
+               </div>
+               )
           })}
          </ul>
 

@@ -13,8 +13,7 @@ export const TodoList = (state = intialState , action) =>{
 	switch(action.type){
 
 		case 'ADD_TODO':
-			let modified_arr = state.TODO.concat([action.title]);
-			return { TODO: modified_arr};
+			return { TODO: state.TODO.concat([{title:action.title, done:false}])};
 			break;
 		default:
 			return state;
