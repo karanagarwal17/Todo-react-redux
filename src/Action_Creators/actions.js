@@ -9,6 +9,6 @@ export const addTodo = (VALUE) => ({
 
 export const deleteTodo = (VALUE) => ({
 	type: CONST.DEL_TODO,
-	title: VALUE
+	ID: VALUE
 
 });

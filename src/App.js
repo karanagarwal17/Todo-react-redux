@@ -4,7 +4,8 @@ import {addTodo,deleteTodo} from './Action_Creators/actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import TODO from './Components/todo_button';
-import Input from './Components/input_title';
+import ADD from './Components/add_todo';
+import DEL from './Components/del_todo';
 
 class App extends Component {
 
@@ -15,22 +16,32 @@ constructor(){
 	}
 }
 
-  check(){
-  	console.log(this.props.TODO_ARRAY);
-  } 
-
   deleteTODO(e){
-    this.props.deleteTodo(e.target.value);
+
+    let id = parseInt(e.target.id, 10);
+    this.props.deleteTodo(id);
   }
 
   change(event){
+
   	this.setState({
   		input_value:event.target.value
   	})
   }
 
   handleClick(e){
-  	this.props.addTodo(this.state.input_value);
+    if(this.state.input_value == '')
+      return;
+
+    if (e.charCode === 13) {
+      this.props.addTodo(this.state.input_value);
+    }
+
+  	
+  }
+
+  console(){
+    console.log('hey!!');
   }
   
   render() {
@@ -39,22 +50,20 @@ constructor(){
 
       	<h1> A TO-DO Application </h1>
 
-      	<Input className = "pad" value = {this.state.input_value} onChange = {(e) => {this.change(e)}} />    
+      	<ADD className = "pad" value = {this.state.input_value} onKeyPress = {(e) => {this.handleClick(e)}} onChange = {(e) => {this.change(e)}} />    
         <TODO className = "pad" handleClick = {(e) => {this.handleClick(e)}}/>
-        
         <ul className = "_ul">
-         {this.props.TODO_ARRAY.map((listValue) => {
+         {this.props.TODO_ARRAY.map((listValue,index) => {
 
             return(
-               <div>
-                <li className = "_font" key = {listValue.title}>{listValue.title} 
-                  <button className = " _left btn btn-default"  id = "divyanshu" value = {listValue.title} onClick = {(e) => {this.deleteTODO(e)}}> X </button>
-                </li>
+               <div id = {index}>
+                  <li key={index} className = "_font" > {listValue.title} 
+                    <DEL value = {listValue.title} id = {index} onClick = {(e) => {this.deleteTODO(e)}} />
+                  </li>
                </div>
                )
           })}
          </ul>
-
       </div>
     );
   }
@@ -62,7 +71,6 @@ constructor(){
 
 const mapStateToProps = (state) => {
 
-  console.log('state change after delete', state);
 	return{
 		'TODO_ARRAY':state.TODO
 	}
@@ -74,5 +82,3 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps,mapDispatchToProps)(App);
 
-
- // <button onClick = {() => {this.check()}}>test me! </button>

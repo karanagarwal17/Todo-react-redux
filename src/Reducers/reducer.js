@@ -14,9 +14,34 @@ export const TodoList = (state = intialState , action) =>{
 	switch(action.type){
 
 		case 'ADD_TODO':
-			return { TODO: state.TODO.concat([{title:action.title, done:false}])};
+			let _new_array = state.TODO.concat([{title:action.title, done:false}])
+			return { TODO: _new_array };
 			break;
+
 		case 'DEL_TODO':
+
+			let new_arr = state.TODO.slice(action.ID + 1,state.TODO.length);
+			let old_arr = state.TODO.slice(0,action.ID);
+
+			// let new_array = state.TODO.filter( z => {return z.title !== action.title} );
+
+			let new_array = old_arr.concat(new_arr);
+			return  { TODO : new_array };
+			break;
+
+		default:
+			return state;
+
+	}
+
+}
+
+/*
+
+return [...state.slice(0, action.index), 
+        Object.assign({}, state[action.index], {done: true}),
+        ...state.slice(action.index + 1)]
+
 
 			// console.log(state.TODO)
 			// let new_arr = state.TODO.slice(action.index,state.TODO.length)
@@ -34,20 +59,6 @@ export const TodoList = (state = intialState , action) =>{
 			// 		fruits.indexOf("Apple");
 			// 	}
 			// })
-			return  { TODO : state.TODO.filter( z => {return z.title !== action.title} )};
-			break;
-		default:
-			return state;
-
-	}
-
-}
-
-/*
-
-return [...state.slice(0, action.index), 
-        Object.assign({}, state[action.index], {done: true}),
-        ...state.slice(action.index + 1)]
 
 
 */
