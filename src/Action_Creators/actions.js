@@ -7,6 +7,7 @@ export const addTodo = (VALUE) => ({
   title: VALUE
 });
 
+
 export const deleteTodo = (VALUE) => ({
 	type: CONST.DEL_TODO,
 	ID: VALUE
