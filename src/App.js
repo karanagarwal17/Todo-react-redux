@@ -87,6 +87,22 @@ class App extends Component {
 
         <ul className = "_ul">
          {this.props.TODO_ARRAY.map((listValue,index) => {
+
+          if(listValue.done == true){
+           return(
+
+             <div id = {index}>
+                  <li key={index} className = "_font_check" > {listValue.title} 
+
+                    <DEL id = {index} onClick = {(e) => {this.deleteTODO(e)}} />
+
+                    <CHECK id = {index} onClick = {(e)=>{this.checkTODO(e)}}/>
+                  </li>
+               </div>
+          )
+          }
+
+          else{
             return(
                <div id = {index}>
                   <li key={index} className = "_font" > {listValue.title} 
@@ -97,6 +113,7 @@ class App extends Component {
                   </li>
                </div>
                )
+          }
           })}
          </ul>
       </div>

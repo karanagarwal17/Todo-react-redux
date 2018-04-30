@@ -33,6 +33,12 @@ export const TodoList = (state = intialState , action) =>{
 		case 'CHECK_TODO':
 			console.log(action.ID);
 
+			let old_arr_ = state.TODO.slice(0,action.ID);
+			let obj_ = [Object.assign({}, state.TODO[action.ID], {done: true})];
+			let new_arr_ = state.TODO.slice(action.ID + 1,state.TODO.length);
+			let final_arr = old_arr_.concat(obj_,new_arr_)
+
+			return  { TODO : final_arr };
 		default:
 			return state;
 

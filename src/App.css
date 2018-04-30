@@ -21,7 +21,10 @@
 	margin-left: 5px;
 }
 
-
+._font_check{
+	text-decoration: line-through;
+	font-size: 24px;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
