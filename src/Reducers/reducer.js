@@ -11,6 +11,7 @@ const intialState = {
 export const TodoList = (state = intialState , action) =>{
 
 	console.log('In Reducer',action);
+	
 	switch(action.type){
 
 		case 'ADD_TODO':

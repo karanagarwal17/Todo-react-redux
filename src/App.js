@@ -20,7 +20,10 @@ constructor(){
 
   deleteTODO(e){
 
+    console.log(e.target);
     let id = parseInt(e.target.id, 10);
+    // console.log('delete todo',id);
+    // console.log(typeof(id));
     this.props.deleteTodo(id);
   }
 
@@ -31,7 +34,7 @@ constructor(){
   	})
   }
 
-  handleClick(e){
+  handleClick_with_keypress_(e){
     if(this.state.input_value == '')
       return;
 
@@ -39,6 +42,14 @@ constructor(){
       this.props.addTodo(this.state.input_value);
     }
   	
+  }
+
+  checkTODO(e){
+    // console.log(e.target)
+    // console.log(e.target.id);
+    // let id = parseInt(e.target.id, 10);
+    
+    console.log(typeof(id));
   }
 
   handleClick_without_keypress_(e){
@@ -58,16 +69,19 @@ constructor(){
 
       	<h1> A TO-DO Application </h1>
 
-      	<ADD className = "pad" value = {this.state.input_value} onKeyPress = {(e) => {this.handleClick(e)}} onChange = {(e) => {this.change(e)}} />    
+      	<ADD className = "pad" value = {this.state.input_value} onKeyPress = {(e) => {this.handleClick_with_keypress_(e)}} onChange = {(e) => {this.change(e)}} />    
+        
         <TODO className = "pad" handleClick = {(e) => {this.handleClick_without_keypress_(e)}}/>
+
         <ul className = "_ul">
          {this.props.TODO_ARRAY.map((listValue,index) => {
-
             return(
                <div id = {index}>
                   <li key={index} className = "_font" > {listValue.title} 
-                    <DEL value = {listValue.title} id = {index} onClick = {(e) => {this.deleteTODO(e)}} />
-                    <CHECK />
+
+                    <DEL id = {index} onClick = {(e) => {this.deleteTODO(e)}} />
+
+                    <CHECK id = {index} onClick = {(e)=>{this.checkTODO(e)}}/>
                   </li>
                </div>
                )
