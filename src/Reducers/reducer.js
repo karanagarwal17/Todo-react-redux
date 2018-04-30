@@ -30,6 +30,9 @@ export const TodoList = (state = intialState , action) =>{
 			return  { TODO : new_array };
 			break;
 
+		case 'CHECK_TODO':
+			console.log(action.ID);
+
 		default:
 			return state;
 

@@ -1,8 +1,17 @@
+
 import React, { Component } from 'react';
 import './App.css';
-import {addTodo,deleteTodo} from './Action_Creators/actions';
+
+// Importing Action Creators
+import {addTodo} from './Action_Creators/add_todo_action';
+import {checkTodo} from './Action_Creators/check_todo_action';
+import {deleteTodo} from './Action_Creators/delete_todo_action';
+
+// Importing Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+// Importing Components
 import TODO from './Components/todo_button';
 import ADD from './Components/add_todo';
 import DEL from './Components/del_todo';
@@ -11,12 +20,16 @@ import CHECK from './Components/check_todo';
 
 class App extends Component {
 
-constructor(){
-	super();
-	this.state = {
-		input_value:''
-	}
-}
+  constructor(){
+  	super();
+  	this.state = {
+  		input_value:''
+  	}
+  }
+
+  componentDidUpdate(){
+    console.log(this.props);
+  }
 
   deleteTODO(e){
 
@@ -47,9 +60,8 @@ constructor(){
   checkTODO(e){
     // console.log(e.target)
     // console.log(e.target.id);
-    // let id = parseInt(e.target.id, 10);
-    
-    console.log(typeof(id));
+    let id = parseInt(e.target.id, 10);
+    this.props.checkTodo(id);
   }
 
   handleClick_without_keypress_(e){
@@ -100,7 +112,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ addTodo,deleteTodo }, dispatch);
+  return bindActionCreators({ addTodo,deleteTodo,checkTodo }, dispatch);
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(App);
