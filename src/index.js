@@ -1,17 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
 
-import { Provider } from 'react-redux';
-import {createStore} from 'redux';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
-import {TodoList} from './Reducers/reducer';
+import { TodoList } from './Reducers/reducer'
 
-const store = createStore(TodoList);
+const store = createStore(TodoList)
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
-  </Provider>, document.getElementById('root'));
+  </Provider>, document.getElementById('root'))
 

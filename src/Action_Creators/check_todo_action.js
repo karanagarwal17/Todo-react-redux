@@ -1,8 +1,7 @@
+import { CONST } from '../Constants/constants'
 
-
-import {CONST} from '../Constants/constants';
-
-export const checkTodo = (VALUE) => ({
+export const checkTodo = (id, value) => ({
 	type: CONST.CHECK_TODO,
-	ID: VALUE
-});
+	ID: id,
+	value: value
+})

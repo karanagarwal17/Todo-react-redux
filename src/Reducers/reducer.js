@@ -1,17 +1,8 @@
-
-
-
-// const intitodosalState = [{title: 'laundry', done: false}]
-
 const intialState = {
 	TODO: []
 }
 
-// let index = 0;
-export const TodoList = (state = intialState , action) =>{
-
-	console.log('In Reducer',action);
-	
+export const TodoList = (state = intialState , action) =>{	
 	switch(action.type){
 
 		case 'ADD_TODO':
@@ -20,55 +11,45 @@ export const TodoList = (state = intialState , action) =>{
 			break;
 
 		case 'DEL_TODO':
-
-			let new_arr = state.TODO.slice(action.ID + 1,state.TODO.length);
-			let old_arr = state.TODO.slice(0,action.ID);
-
-			// let new_array = state.TODO.filter( z => {return z.title !== action.title} );
-
-			let new_array = old_arr.concat(new_arr);
+			let new_arr, old_arr, new_array;
+			if(state.TODO[action.ID].edit){
+				old_arr_ = state.TODO.slice(0,action.ID);
+				obj_ = [Object.assign({}, state.TODO[action.ID], {edit: false})];
+				new_arr_ = state.TODO.slice(action.ID + 1,state.TODO.length);
+				new_array = old_arr_.concat(obj_,new_arr_)
+			} else {
+				new_arr = state.TODO.slice(action.ID + 1,state.TODO.length);
+				old_arr = state.TODO.slice(0,action.ID);
+				new_array = old_arr.concat(new_arr);
+			}
 			return  { TODO : new_array };
 			break;
 
 		case 'CHECK_TODO':
-			console.log(action.ID);
-
-			let old_arr_ = state.TODO.slice(0,action.ID);
-			let obj_ = [Object.assign({}, state.TODO[action.ID], {done: true})];
-			let new_arr_ = state.TODO.slice(action.ID + 1,state.TODO.length);
-			let final_arr = old_arr_.concat(obj_,new_arr_)
-
+			let old_arr_, obj_, new_arr_, final_arr;
+			if(state.TODO[action.ID].edit){
+				old_arr_ = state.TODO.slice(0,action.ID);
+				obj_ = [Object.assign({}, state.TODO[action.ID], {edit: false, title: action.value})];
+				new_arr_ = state.TODO.slice(action.ID + 1,state.TODO.length);
+				final_arr = old_arr_.concat(obj_,new_arr_)
+			} else {
+				old_arr_ = state.TODO.slice(0,action.ID);
+				obj_ = [Object.assign({}, state.TODO[action.ID], {done: true})];
+				new_arr_ = state.TODO.slice(action.ID + 1,state.TODO.length);
+				final_arr = old_arr_.concat(obj_,new_arr_)
+			}
 			return  { TODO : final_arr };
+			break;
+
+		case 'EDIT_TODO':
+			old_arr_ = state.TODO.slice(0,action.ID);
+			obj_ = [Object.assign({}, state.TODO[action.ID], {edit: true})];
+			new_arr_ = state.TODO.slice(action.ID + 1,state.TODO.length);
+			final_arr = old_arr_.concat(obj_,new_arr_)
+			return  { TODO : final_arr };
+			break;
+
 		default:
 			return state;
-
 	}
-
 }
-
-/*
-
-return [...state.slice(0, action.index), 
-        Object.assign({}, state[action.index], {done: true}),
-        ...state.slice(action.index + 1)]
-
-
-			// console.log(state.TODO)
-			// let new_arr = state.TODO.slice(action.index,state.TODO.length)
-			// console.log('new arr',new_arr);
-			// let old_arr = state.TODO.slice(0,action.index - 1)
-			// console.log('old arr',old_arr);
-			// console.log('testing',{ TODO : old_arr.concat(new_arr)})
-			// return { TODO : old_arr.concat(new_arr)}
-
-			// state.TODO.map((x) => {
-
-			// 	console.log(x);
-			// 	if(action.title == x.title){
-			// 		console.log(x.title);
-			// 		fruits.indexOf("Apple");
-			// 	}
-			// })
-
-
-*/
