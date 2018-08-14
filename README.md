@@ -1,1 +1,1 @@
-A To-DO Application built using React.jj and Redux
+A To-DO Application built using React.js and Redux
